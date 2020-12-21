@@ -1,15 +1,26 @@
 function add(a, b) {
-  console.log(`Adding ${a} and ${b}`);
-  return a + b;
+    console.log(`Adding ${a} and ${b}`);
+    return a + b;
 }
 
 function subtract(a, b) {
-  console.log(`Subtracting ${b} from ${a}`);
-  return a - b;
+    console.log(`Subtracting ${b} from ${a}`);
+    return a - b;
 }
 
 // Write this function to achieve the result below
-function calculateOnce(fn) {}
+function calculateOnce(fn) {
+    let cache = {};
+
+    return (...args) => {
+        if (cache[args]) return cache[args];
+
+        let result = fn(...args);
+        cache[args] = result;
+
+        return result;
+    };
+}
 
 const addOnce = calculateOnce(add);
 const subtractOnce = calculateOnce(subtract);
